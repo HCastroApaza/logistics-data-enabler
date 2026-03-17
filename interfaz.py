@@ -11,7 +11,7 @@ st.set_page_config(page_title="🚀 Sistema de Rutas Inteligente", layout="wide"
 st.title("🚀 Sistema de Rutas Inteligente + Enriquecedor")
 
 # Configuración del Receptor (Apps Script)
-ID_WEB_APP = "TU_ID_AQUI"
+ID_WEB_APP = "AKfycbxZL8hCWSU3tYmSjr7oOSXIoPFpFITgqtNdTtmAOfma9k2kD4Lry17D5-PG4zVrsaTp"
 URL_BASE_GAS = f"https://script.google.com/macros/s/{ID_WEB_APP}/exec"
 
 # Función de limpieza
@@ -29,23 +29,31 @@ def normalizar_texto(texto):
     return texto
 
 # Función para generar hipervínculos (Excel-friendly)
-def procesar_fila(fila):
+def procesar_fila(fila, nombre_cap): # <-- Agregamos nombre_cap aquí
     marca = limpiar(fila.get("Marca"))
     direccion = limpiar(fila.get("Dirección"))
     distrito = limpiar(fila.get("Distrito"))
     kam = limpiar(fila.get("KAM"))
     psi = limpiar(fila.get("PSI"))
+    puntos = limpiar(fila.get("Puntos BBVA")) # <-- Capturamos los puntos
 
-    query = urllib.parse.quote(f"{marca} {direccion} {distrito}")
+    # Mantenemos "Lima Peru" para evitar que Maps te mande a Junín
+    query = urllib.parse.quote(f"{marca} {direccion} {distrito} Lima Peru")
 
     maps_url = f"https://www.google.com/maps/search/{query}"
     google_url = f"https://www.google.com/search?q={query}"
-    magic_link = (
-        f"{URL_BASE_GAS}?comercio={urllib.parse.quote(marca)}"
-        f"&dir={urllib.parse.quote(direccion)}"
-        f"&kam={urllib.parse.quote(kam)}"
-        f"&psi={urllib.parse.quote(psi)}"
-    )
+    
+    # Empaquetado completo y seguro para el Magic Link
+    query_params = urllib.parse.urlencode({
+        "comercio": marca,
+        "dir": direccion,
+        "dist": distrito,
+        "kam": kam,
+        "psi": psi,
+        "puntos": puntos,
+        "cap": nombre_cap  # <-- Se envía el nombre del capacitador
+    })
+    magic_link = f"{URL_BASE_GAS}?{query_params}"
 
     # Fórmulas Excel con hipervínculo
     maps_text = f'=HYPERLINK("{maps_url}", "LINK MAPS")'
@@ -138,8 +146,7 @@ if archivo:
                         st.success(f"Se encontraron {len(df_final)} locales para visitar.")
 
                         # 4. Enriquecimiento con hipervínculos
-                        df_final[['Link MAPS', 'Link GOOGLE', 'Auto-Relleno']] = df_final.apply(procesar_fila, axis=1)
-
+                        df_final[['Link MAPS', 'Link GOOGLE', 'Auto-Relleno']] = df_final.apply(lambda x: procesar_fila(x, nombre_sel), axis=1)
                         # Mostrar tabla
                         st.dataframe(df_final)
 

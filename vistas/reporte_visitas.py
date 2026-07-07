@@ -7,7 +7,7 @@ from io import BytesIO
 from st_aggrid import AgGrid, GridOptionsBuilder, JsCode
 from modulos.procesamiento_datos import normalizar_texto, procesar_fila
 
-URL_BASE_DATOS_GS = "https://docs.google.com/spreadsheets/d/186GinOg7PgFcp1g9LAmW32K5vlTEK8ChYjI3qnsf1-4/edit?usp=sharing"
+URL_BASE_DATOS_GS = "https://docs.google.com/spreadsheets/d/1ovhCYtfn_CMXTZz2ZIwSL7oo77vC69XG4Vl22QhyZko/edit?usp=sharing"
 
 def mostrar():
     col_titulo, col_volver = st.columns([4, 1])

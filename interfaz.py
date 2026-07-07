@@ -18,7 +18,7 @@ def cargar_css(archivo):
 
 cargar_css("assets/estilos.css")
 
-URL_LOGO_REWARDS = "https://raw.githubusercontent.com/hcastro-rewards/Formulario_CAP/main/LOGO_REWARDS.png"
+URL_LOGO_REWARDS = "https://raw.githubusercontent.com/HCastroApaza/logistics-data-enabler/main/LOGO_REWARDS.png"
 CLAVE_GERENCIA = "GER123"
 
 # --- INICIALIZACIÓN DE VARIABLES DE SESIÓN ---

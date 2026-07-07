@@ -1,0 +1,140 @@
+/* --- CORRECCIÓN ERROR DE ICONOS --- */
+html, body, .stApp, h1, h2, h3, h4, h5, h6, p, label, div[data-testid="stMarkdownContainer"] > p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* --- FONDOS PRINCIPALES --- */
+.stApp { background-color: #0f172a; color: #f8fafc !important; }
+
+/* Inyección profunda del color base corporativo en toda la barra lateral */
+[data-testid="stSidebar"], 
+[data-testid="stSidebar"] > div:first-child { 
+    background-color: #1e293b !important; 
+    border-right: 1px solid #334155; 
+}
+
+
+/* --- EXPANSORES NATIVOS (ACORDEONES) UNIFICADOS AL COLOR DE LA BARRA --- */
+[data-testid="stExpander"] {
+    border: none !important;
+    background-color: #1e293b !important; /* Camuflaje del contenedor */
+    background: #1e293b !important;
+    box-shadow: none !important;
+    margin-bottom: 0px !important;
+}
+[data-testid="stExpander"] details { 
+    border: none !important; 
+    background-color: #1e293b !important; 
+}
+[data-testid="stExpander"] summary {
+    padding: 15px 15px !important;
+    background-color: #1e293b !important; /* Camuflaje del título */
+    color: #94a3b8 !important;
+    font-weight: bold !important;
+    border-bottom: 1px solid #334155 !important;
+    border-radius: 0px !important;
+    transition: color 0.3s ease;
+}
+[data-testid="stExpander"] summary:hover,
+[data-testid="stExpander"] summary:focus {
+    color: #38bdf8 !important;
+    background-color: #1e293b !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+[data-testid="stExpanderDetails"] {
+    padding-top: 0px !important;
+    padding-bottom: 5px !important;
+    background-color: #1e293b !important;
+}
+
+
+/* --- DISEÑO PLANO PARA BOTONES LATERALES (CAMUFLAJE TOTAL EXTREMO) --- */
+/* Atacamos todas las variantes posibles del botón nativo de Streamlit */
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button[kind="secondary"],
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button {
+    width: 100%;
+    background-color: #1e293b !important; /* El color exacto de la barra */
+    background: #1e293b !important;       /* Fuerza bruta contra el tema nativo */
+    border: 1px solid #1e293b !important; /* Borde del mismo color para fundirse */
+    box-shadow: none !important;
+    color: #f8fafc !important;            /* Texto blanco sólido */
+    text-align: left !important;
+    justify-content: flex-start !important;
+    padding: 10px 15px 10px 25px !important; 
+    margin: 0 0 5px 0 !important; 
+    border-radius: 6px !important; 
+    font-weight: normal !important;
+    font-size: 16px !important;           /* <-- AQUI: TAMAÑO PARA LOS BOTONES */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Neutralizamos cualquier texto o contenedor interno que Streamlit inyecte */
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button[kind="secondary"] div,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button[kind="secondary"] p,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button div,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button p {
+    color: #f8fafc !important;
+    font-size: 14px !important;           /* <-- AQUI: TAMAÑO FORZADO AL TEXTO INTERNO */
+}
+
+/* --- FORZAR JUSTIFICADO A LA IZQUIERDA DE LOS TEXTOS INTERNOS --- */
+/* Forzamos a que los contenedores internos (div y span) ocupen todo el ancho y se alineen al inicio */
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button > div,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button > div > span,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button div[data-testid="stMarkdownContainer"] {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    display: flex !important;
+}
+
+/* Alineamos explícitamente el párrafo final a la izquierda */
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button p {
+    text-align: left !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+
+/* --- HOVER Y ACTIVE: SOLO BORDE LUMINOSO CYAN --- */
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button[kind="secondary"]:hover,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button[kind="secondary"]:focus,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button[kind="secondary"]:active,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button:hover,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button:focus,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] div.stButton > button:active {
+    background-color: #1e293b !important; /* El fondo NUNCA cambia del azul corporativo */
+    background: #1e293b !important;       
+    border: 1px solid #38bdf8 !important; /* Borde luminoso Cyan */
+    color: #38bdf8 !important;            
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.4) !important; 
+    outline: none !important;
+}
+
+/* Forzamos que el texto interno también se pinte de Cyan al tocar */
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button:hover div,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button:hover p,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button:focus div,
+[data-testid="stSidebar"] [data-testid="stExpanderDetails"] button:focus p {
+    color: #38bdf8 !important;
+}
+
+
+/* --- BOTONES PRINCIPALES DE ACCIÓN (Área Central) --- */
+div[data-testid="stMainBlockContainer"] div.stButton > button { 
+    background-color: #38bdf8 !important; 
+    color: #0f172a !important; 
+    border: none; 
+    border-radius: 8px; 
+    font-weight: bold; 
+    padding: 10px 20px;
+}
+div[data-testid="stMainBlockContainer"] div.stButton > button:hover { 
+    background-color: #0284c7 !important; 
+    color: #ffffff !important; 
+}
+
+/* --- ALERTAS --- */
+.stAlert[data-baseweb="alert"] { background-color: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; }
+.stAlert[data-baseweb="alert-warning"] { background-color: rgba(245, 158, 11, 0.1); border: 1px solid #f59e0b; }
+.stAlert[data-baseweb="alert-error"] { background-color: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; }

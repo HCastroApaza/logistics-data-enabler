@@ -1,0 +1,10 @@
+streamlit>=1.57.0
+pandas>=3.0.3
+numpy>=2.4.6
+# Mantén solo las versiones fijadas que SEPAS que son necesarias para tu código
+streamlit-aggrid>=1.2.1
+streamlit-option-menu>=0.4.0
+pytz
+openpyxl
+# Puedes eliminar las versiones de paquetes secundarios como gitdb, smmap, etc.,
+# ya que Streamlit los instalará automáticamente como dependencias.
